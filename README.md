@@ -7,9 +7,10 @@ This repository provides a Rust library with Python bindings for converting elev
 Create a virtual environment and install `maturin` to build the extension module:
 
 ```bash
-python -m venv .venv
+uv venv
+uv add numpy maturin
+cd rust_core_mesh
 source .venv/bin/activate
-pip install maturin numpy
 maturin develop --release
 ```
 
