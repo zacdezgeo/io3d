@@ -4,6 +4,8 @@ use numpy::{PyArray2, PyArray3};
 mod mesh;
 mod export;
 mod convert;
+#[cfg(test)]
+mod tests;
 
 pub use crate::mesh::{Vertex, Face, Mesh, MeshFrame};
 use crate::export::export_ply as export_ply_rs;
@@ -20,7 +22,7 @@ fn export_ply(mesh: &Mesh, path: &str) -> PyResult<()> {
 }
 
 #[pymodule]
-fn rust_core_mesh(_py: Python, m: &PyModule) -> PyResult<()> {
+fn io3d(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_class::<Vertex>()?;
     m.add_class::<Face>()?;
     m.add_class::<Mesh>()?;
