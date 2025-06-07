@@ -1,5 +1,5 @@
 import numpy as np
-from rust_core_mesh import raster_to_mesh
+from io3d import raster_to_mesh
 
 
 def test_raster_to_mesh_simple():

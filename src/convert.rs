@@ -1,19 +1,27 @@
 use numpy::{PyArray2, PyArray3};
 use pyo3::prelude::*;
+use ndarray::{ArrayView2, ArrayView3};
 
 use crate::mesh::{Mesh, Vertex};
 
 pub fn raster_to_mesh<'py>(elevation: &'py PyArray2<f32>, rgb: Option<&'py PyArray3<u8>>) -> PyResult<Mesh> {
     let elev = unsafe { elevation.as_array() };
-    let (height, width) = (elev.shape()[0], elev.shape()[1]);
-
     let colors = rgb.map(|arr| unsafe { arr.as_array() });
+    Ok(build_mesh(elev, colors))
+}
+
+pub fn raster_to_mesh_native(elev: ArrayView2<f32>, rgb: Option<ArrayView3<u8>>) -> Mesh {
+    build_mesh(elev, rgb)
+}
+
+fn build_mesh(elev: ArrayView2<f32>, rgb: Option<ArrayView3<u8>>) -> Mesh {
+    let (height, width) = (elev.shape()[0], elev.shape()[1]);
 
     let mut vertices = Vec::with_capacity(height * width);
     for i in 0..height {
         for j in 0..width {
             let z = elev[[i, j]];
-            let (r, g, b) = if let Some(ref col) = colors {
+            let (r, g, b) = if let Some(ref col) = rgb {
                 (
                     col[[i, j, 0]],
                     col[[i, j, 1]],
@@ -39,6 +47,6 @@ pub fn raster_to_mesh<'py>(elevation: &'py PyArray2<f32>, rgb: Option<&'py PyArr
         }
     }
 
-    Ok(Mesh { vertices, faces })
+    Mesh { vertices, faces }
 }
 

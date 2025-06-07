@@ -1,5 +1,5 @@
 [package]
-name = "rust_core_mesh"
+name = "io3d_core"
 version = "0.1.0"
 edition = "2021"
 
@@ -10,6 +10,4 @@ crate-type = ["cdylib"]
 pyo3 = { version = "0.20", features = ["extension-module"] }
 numpy = "0.20"
 thiserror = "1"
-
-[dev-dependencies]
 ndarray = "0.15"

@@ -1,3 +1,6 @@
 *.ply
 target/
 .venv
+__pycache__/
+*.pyc
+*.pyo
