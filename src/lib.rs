@@ -1,5 +1,5 @@
 use pyo3::prelude::*;
-use numpy::{PyArray2, PyArray3};
+use numpy::{PyArray2, PyArrayDyn};
 
 mod mesh;
 mod export;
@@ -12,7 +12,10 @@ use crate::export::export_ply as export_ply_rs;
 use crate::convert::raster_to_mesh as raster_to_mesh_rs;
 
 #[pyfunction]
-fn raster_to_mesh(elevation: &PyArray2<f32>, rgb: Option<&PyArray3<u8>>) -> PyResult<Mesh> {
+fn raster_to_mesh(
+    elevation: &PyArray2<f32>,
+    rgb: Option<&PyArrayDyn<u8>>,
+) -> PyResult<Mesh> {
     raster_to_mesh_rs(elevation, rgb)
 }
 

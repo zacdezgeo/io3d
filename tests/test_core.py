@@ -8,4 +8,25 @@ def test_raster_to_mesh_simple():
     assert len(mesh.vertices) == 4
     assert len(mesh.faces) == 2
     v0 = mesh.vertices[0]
-    assert (v0.x, v0.y, v0.z, v0.r, v0.g, v0.b) == (0.0, 0.0, 0.0, 255, 255, 255)
+    assert (v0.x, v0.y, v0.z) == (0.0, 0.0, 0.0)
+    assert v0.colors == [[255, 255, 255]]
+
+
+def test_raster_to_mesh_time_colors():
+    elev = np.zeros((2, 2), dtype=np.float32)
+    rgb = np.array(
+        [
+            [
+                [[255, 0, 0], [0, 255, 0]],
+                [[0, 0, 255], [255, 255, 0]],
+            ],
+            [
+                [[0, 0, 0], [1, 1, 1]],
+                [[2, 2, 2], [3, 3, 3]],
+            ],
+        ],
+        dtype=np.uint8,
+    )
+    mesh = raster_to_mesh(elev, rgb)
+    assert mesh.vertices[0].colors[0] == [255, 0, 0]
+    assert mesh.vertices[0].colors[1] == [0, 0, 0]
