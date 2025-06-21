@@ -16,10 +16,10 @@ maturin develop --release
 
 ## Demo
 
-Run the example script to generate a sample mesh and write `demo.ply`:
+Run the example script to convert a DEM to a mesh and write `squamish.ply`:
 
 ```bash
-python rust_core_mesh/examples/demo.py
+python examples/squamish_to_ply.py
 ```
 
-The resulting `demo.ply` can be imported into Blender with vertex colors.
+The resulting `squamish.ply` can be imported into Blender with vertex colors.
