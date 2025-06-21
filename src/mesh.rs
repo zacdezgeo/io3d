@@ -9,12 +9,11 @@ pub struct Vertex {
     pub y: f32,
     #[pyo3(get)]
     pub z: f32,
+    /// Per-vertex colors for each time step.
+    ///
+    /// The inner array stores an RGB triplet for a given frame.
     #[pyo3(get)]
-    pub r: u8,
-    #[pyo3(get)]
-    pub g: u8,
-    #[pyo3(get)]
-    pub b: u8,
+    pub colors: Vec<[u8; 3]>,
 }
 
 #[pyclass]

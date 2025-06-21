@@ -1,36 +1,56 @@
-use numpy::{PyArray2, PyArray3};
+use numpy::{PyArray2, PyArrayDyn};
 use pyo3::prelude::*;
-use ndarray::{ArrayView2, ArrayView3};
+use ndarray::{ArrayView2, ArrayViewD};
 
 use crate::mesh::{Mesh, Vertex};
 
-pub fn raster_to_mesh<'py>(elevation: &'py PyArray2<f32>, rgb: Option<&'py PyArray3<u8>>) -> PyResult<Mesh> {
+pub fn raster_to_mesh<'py>(
+    elevation: &'py PyArray2<f32>,
+    rgb: Option<&'py PyArrayDyn<u8>>,
+) -> PyResult<Mesh> {
     let elev = unsafe { elevation.as_array() };
     let colors = rgb.map(|arr| unsafe { arr.as_array() });
     Ok(build_mesh(elev, colors))
 }
 
-pub fn raster_to_mesh_native(elev: ArrayView2<f32>, rgb: Option<ArrayView3<u8>>) -> Mesh {
+pub fn raster_to_mesh_native(elev: ArrayView2<f32>, rgb: Option<ArrayViewD<u8>>) -> Mesh {
     build_mesh(elev, rgb)
 }
 
-fn build_mesh(elev: ArrayView2<f32>, rgb: Option<ArrayView3<u8>>) -> Mesh {
+fn build_mesh(elev: ArrayView2<f32>, rgb: Option<ArrayViewD<u8>>) -> Mesh {
     let (height, width) = (elev.shape()[0], elev.shape()[1]);
 
     let mut vertices = Vec::with_capacity(height * width);
     for i in 0..height {
         for j in 0..width {
             let z = elev[[i, j]];
-            let (r, g, b) = if let Some(ref col) = rgb {
-                (
-                    col[[i, j, 0]],
-                    col[[i, j, 1]],
-                    col[[i, j, 2]],
-                )
+            let colors = if let Some(ref col) = rgb {
+                match col.ndim() {
+                    3 => {
+                        vec![[
+                            col[[i, j, 0]],
+                            col[[i, j, 1]],
+                            col[[i, j, 2]],
+                        ]]
+                    }
+                    4 => {
+                        let frames = col.shape()[0];
+                        (0..frames)
+                            .map(|t| {
+                                [
+                                    col[[t, i, j, 0]],
+                                    col[[t, i, j, 1]],
+                                    col[[t, i, j, 2]],
+                                ]
+                            })
+                            .collect()
+                    }
+                    _ => vec![[255u8, 255u8, 255u8]],
+                }
             } else {
-                (255u8, 255u8, 255u8)
+                vec![[255u8, 255u8, 255u8]]
             };
-            vertices.push(Vertex { x: j as f32, y: i as f32, z, r, g, b });
+            vertices.push(Vertex { x: j as f32, y: i as f32, z, colors });
         }
     }
 
