@@ -23,3 +23,7 @@ python rust_core_mesh/examples/demo.py
 ```
 
 The resulting `demo.ply` can be imported into Blender with vertex colors.
+
+## License
+
+This project is licensed under the terms of the MIT License. See the [LICENSE](LICENSE) file for details.
