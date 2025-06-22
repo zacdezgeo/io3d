@@ -9,7 +9,6 @@ Create a virtual environment and install `maturin` to build the extension module
 ```bash
 uv venv
 uv add numpy maturin
-cd rust_core_mesh
 source .venv/bin/activate
 maturin develop --release
 ```
