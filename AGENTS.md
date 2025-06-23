@@ -1,0 +1,2 @@
+- start by analyzing the message to establish sequencing of tasks.
+- do not start immediately looking at history of code commits or new changes in repository before understanding your task sequence.

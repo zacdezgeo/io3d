@@ -20,7 +20,8 @@ pub fn export_ply(mesh: &Mesh, path: &str) -> Result<()> {
     writeln!(file, "end_header")?;
 
     for v in &mesh.vertices {
-        writeln!(file, "{} {} {} {} {} {}", v.x, v.y, v.z, v.r, v.g, v.b)?;
+        let color = v.colors.get(0).copied().unwrap_or([255, 255, 255]);
+        writeln!(file, "{} {} {} {} {} {}", v.x, v.y, v.z, color[0], color[1], color[2])?;
     }
 
     for f in &mesh.faces {

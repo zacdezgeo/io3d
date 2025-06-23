@@ -9,21 +9,20 @@ Create a virtual environment and install `maturin` to build the extension module
 ```bash
 uv venv
 uv add numpy maturin
-cd rust_core_mesh
 source .venv/bin/activate
 maturin develop --release
 ```
 
 ## Demo
 
-Run the example script to generate a sample mesh and write `demo.ply`:
+Two example scripts show how to read rasters with ``rasterio`` and export
+colored meshes:
 
 ```bash
-python rust_core_mesh/examples/demo.py
+python examples/squamish_to_ply.py  # elevation + categorical land cover
+python examples/dem_ndsi_to_ply.py  # elevation + two NDSI overlay frames
 ```
 
-The resulting `demo.ply` can be imported into Blender with vertex colors.
-
-## License
-
-This project is licensed under the terms of the MIT License. See the [LICENSE](LICENSE) file for details.
+Both scripts produce ``.ply`` files that can be imported into Blender with
+vertex colors. The land cover values are rounded to the nearest integer so
+slightly off floating-point values map correctly to the style table.

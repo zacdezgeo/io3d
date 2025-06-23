@@ -1,5 +1,5 @@
 import numpy as np
-from io3d import raster_to_mesh
+from io3d import raster_to_mesh, raster_to_mesh_styled_py
 
 
 def test_raster_to_mesh_simple():
