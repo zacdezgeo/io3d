@@ -42,3 +42,19 @@ fn test_raster_to_mesh_styled() {
     let mesh = raster_to_mesh_styled_native(elev.view(), Some(land.view()), Some(overlay.view()), &spec);
     assert_eq!(mesh.vertices[0].colors.len(), 2);
 }
+
+#[test]
+fn test_categorical_rounding() {
+    let elev = array![[0f32]];
+    let land = array![[9.6f32]];
+
+    let mut map = HashMap::new();
+    map.insert(10u8, [1u8, 2u8, 3u8]);
+    let spec = StyleSpec {
+        base_layer: Some(BandStyle::Categorical(map)),
+        overlays: Vec::new(),
+    };
+
+    let mesh = raster_to_mesh_styled_native(elev.view(), Some(land.view()), None, &spec);
+    assert_eq!(mesh.vertices[0].colors[0], [1, 2, 3]);
+}

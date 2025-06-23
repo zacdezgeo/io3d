@@ -15,15 +15,6 @@ maturin develop --release
 
 ## Demo
 
-<<<<<<< ours
-Run the example script to convert a DEM to a mesh and write `squamish.ply`:
-
-```bash
-python examples/squamish_to_ply.py
-```
-
-The resulting `squamish.ply` can be imported into Blender with vertex colors.
-=======
 Two example scripts show how to read rasters with ``rasterio`` and export
 colored meshes:
 
@@ -33,5 +24,5 @@ python examples/dem_ndsi_to_ply.py  # elevation + two NDSI overlay frames
 ```
 
 Both scripts produce ``.ply`` files that can be imported into Blender with
-vertex colors.
->>>>>>> theirs
+vertex colors. The land cover values are rounded to the nearest integer so
+slightly off floating-point values map correctly to the style table.

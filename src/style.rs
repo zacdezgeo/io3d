@@ -47,7 +47,11 @@ impl BandStyle {
     pub fn color(&self, value: f32) -> [u8; 3] {
         match self {
             BandStyle::Categorical(map) => {
-                map.get(&(value as u8)).copied().unwrap_or([255, 255, 255])
+                if value.is_nan() {
+                    return [255, 255, 255];
+                }
+                let key = value.round().clamp(0.0, 255.0) as u8;
+                map.get(&key).copied().unwrap_or([255, 255, 255])
             }
             BandStyle::Continuous(ramp, min, max) => {
                 if *max <= *min {

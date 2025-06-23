@@ -27,13 +27,6 @@ fn build_mesh(elev: ArrayView2<f32>, rgb: Option<ArrayViewD<u8>>) -> Mesh {
             let colors = if let Some(ref col) = rgb {
                 match col.ndim() {
                     3 => {
-<<<<<<< ours
-                        vec![[
-                            col[[i, j, 0]],
-                            col[[i, j, 1]],
-                            col[[i, j, 2]],
-                        ]]
-=======
                         let channels = col.shape()[2];
                         if channels % 3 != 0 {
                             vec![[255u8, 255u8, 255u8]]
@@ -49,7 +42,6 @@ fn build_mesh(elev: ArrayView2<f32>, rgb: Option<ArrayViewD<u8>>) -> Mesh {
                                 })
                                 .collect()
                         }
->>>>>>> theirs
                     }
                     4 => {
                         let frames = col.shape()[0];
