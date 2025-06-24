@@ -1,6 +1,6 @@
 import rasterio
 import numpy as np
-from io3d import raster_to_mesh_styled_py, export_ply
+from meshup import raster_to_mesh_styled, export_ply
 
 """Example converting `dem_ndsi.tif` with two NDSI layers to a mesh."""
 
@@ -35,6 +35,6 @@ style = {
 }
 
 overlays = np.stack([ndsi_may, ndsi_june], axis=0)
-mesh = raster_to_mesh_styled_py(elevation, style, None, overlays)
+mesh = raster_to_mesh_styled(elevation, style, None, overlays)
 export_ply(mesh, "dem_ndsi.ply")
 print("Wrote dem_ndsi.ply")

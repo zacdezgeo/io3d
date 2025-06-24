@@ -1,5 +1,5 @@
 import rasterio
-from io3d import raster_to_mesh_styled_py, export_ply
+from meshup import raster_to_mesh_styled, export_ply
 
 # Path to the DEM file
 path = "data/dem_world_cover.tif"
@@ -40,5 +40,5 @@ style = {
     "overlays": [],
 }
 
-mesh = raster_to_mesh_styled_py(elev, style, landcover, None)
+mesh = raster_to_mesh_styled(elev, style, landcover, None)
 export_ply(mesh, "squamish_color.ply")

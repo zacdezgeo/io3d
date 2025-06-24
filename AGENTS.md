@@ -1,2 +1,5 @@
 - start by analyzing the message to establish sequencing of tasks.
 - do not start immediately looking at history of code commits or new changes in repository before understanding your task sequence.
+- make your branch names simple, short and not reference codex
+- in your PR messages, use the format: what i changed, how to test it, and other notes
+- in the other notes sections, include references to the issues that will be closed (i.e. closes #5)
