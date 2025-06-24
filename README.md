@@ -24,5 +24,7 @@ python examples/dem_ndsi_to_ply.py  # elevation + two NDSI overlay frames
 ```
 
 Both scripts produce ``.ply`` files that can be imported into Blender with
-vertex colors. The land cover values are rounded to the nearest integer so
-slightly off floating-point values map correctly to the style table.
+vertex colors. When multiple time steps are present, the writer now includes
+RGB triples for each frame (`red_0`, `green_0`, `blue_0`, ...). The land cover
+values are rounded to the nearest integer so slightly off floating-point values
+map correctly to the style table.
