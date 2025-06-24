@@ -1,5 +1,19 @@
 import numpy as np
-    assert v0.color_hex() == "ffffff"
+from io3d import raster_to_mesh, raster_to_mesh_styled_py, write_frame_ply
+
+
+def test_write_frame_ply(tmp_path):
+    elev = np.array([[0.0, 1.0], [2.0, 3.0]], dtype=np.float32)
+    rgb = np.zeros((2, 2, 6), dtype=np.uint8)
+    rgb[:, :, :3] = [10, 20, 30]
+    rgb[:, :, 3:] = [40, 50, 60]
+    mesh = raster_to_mesh(elev, rgb)
+    path = tmp_path / "frame1.ply"
+    write_frame_ply(mesh, str(path), 1)
+    assert path.exists()
+    with open(path, "r") as f:
+        lines = [next(f) for _ in range(10)]
+    assert lines[0].strip() == "ply"
 from meshup import raster_to_mesh, raster_to_mesh_styled
 
 
