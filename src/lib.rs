@@ -37,7 +37,7 @@ fn export_ply(mesh: &Mesh, path: &str) -> PyResult<()> {
 }
 
 #[pymodule]
-fn io3d(_py: Python, m: &PyModule) -> PyResult<()> {
+fn meshup(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_class::<Vertex>()?;
     m.add_class::<Face>()?;
     m.add_class::<Mesh>()?;
