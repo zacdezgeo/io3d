@@ -1,4 +1,5 @@
 import numpy as np
+    assert v0.color_hex() == "ffffff"
 from meshup import raster_to_mesh, raster_to_mesh_styled
 
 

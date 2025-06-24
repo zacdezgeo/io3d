@@ -16,6 +16,27 @@ pub struct Vertex {
     pub colors: Vec<[u8; 3]>,
 }
 
+#[pymethods]
+impl Vertex {
+    /// Return the color for the given frame as a hexadecimal string.
+    ///
+    /// If the requested frame does not exist, white (`ffffff`) is returned.
+    #[pyo3(signature = (frame=0))]
+    fn color_hex(&self, frame: usize) -> String {
+        let c = self.colors.get(frame).copied().unwrap_or([255, 255, 255]);
+        format!("{:02x}{:02x}{:02x}", c[0], c[1], c[2])
+    }
+
+    /// Return all colors for this vertex as hexadecimal strings.
+    fn colors_hex(&self) -> Vec<String> {
+        self
+            .colors
+            .iter()
+            .map(|c| format!("{:02x}{:02x}{:02x}", c[0], c[1], c[2]))
+            .collect()
+    }
+}
+
 #[pyclass]
 #[derive(Clone, Debug)]
 pub struct Face {
