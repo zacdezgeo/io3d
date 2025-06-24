@@ -1,6 +1,6 @@
 import rasterio
 import numpy as np
-from io3d import raster_to_mesh_styled_py, export_ply
+from meshup import raster_to_mesh_styled_py, export_ply
 
 """Example converting `dem_ndsi.tif` with two NDSI layers to a mesh."""
 
