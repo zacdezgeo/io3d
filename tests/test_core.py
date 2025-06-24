@@ -1,5 +1,5 @@
 import numpy as np
-from meshup import raster_to_mesh, raster_to_mesh_styled_py
+from meshup import raster_to_mesh, raster_to_mesh_styled
 
 
 def test_raster_to_mesh_simple():
