@@ -16,3 +16,4 @@ def test_raster_to_mesh_simple():
         v0.colors[0][1],
         v0.colors[0][2],
     ) == (0.0, 0.0, 0.0, 255, 255, 255)
+    
