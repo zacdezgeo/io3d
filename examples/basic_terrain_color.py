@@ -1,5 +1,5 @@
 import rasterio
-from io3d import raster_to_mesh_styled_py, export_ply
+from meshup import raster_to_mesh_styled_py, export_ply
 
 # Path to the DEM file
 path = "data/dem_world_cover.tif"

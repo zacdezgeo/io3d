@@ -1,4 +1,4 @@
-# io3d 
+# meshup
 
 This repository provides a Rust library with Python bindings for converting elevation rasters to triangle meshes. The library exposes functions to build a mesh and export it to the PLY format for use in Blender or other tools.
 

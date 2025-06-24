@@ -1,5 +1,5 @@
 import rasterio
-from io3d import raster_to_mesh, export_ply
+from meshup import raster_to_mesh, export_ply
 
 # Path to the DEM file
 path = "data/squamish.tif"
