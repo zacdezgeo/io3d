@@ -12,7 +12,6 @@ with rasterio.open(path) as src:
     ndsi_june = src.read(3).astype("float32")
 
 style = {
-    "base_layer": None,
     "overlays": [
         (
             "ndsi_may",
